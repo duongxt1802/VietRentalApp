@@ -25,6 +25,10 @@ VietRental App là một hệ thống thuê xe trên nền tảng di động, ch
 - React Navigation
 - Context API
 
+## 📥 Link Tải App & Video Demo
+- **down app tại đây**: [https://drive.google.com/file/d/1gy4ximpxWic25-oxJW_R6FecbgMVbx6N/view?usp=drive_link](https://drive.google.com/file/d/1gy4ximpxWic25-oxJW_R6FecbgMVbx6N/view?usp=drive_link)
+- **video demo**: [https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link](https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link)
+
 ## Hướng dẫn cài đặt
 1. Mở terminal tại thư mục dự án `c:\VietRentalApp`
 2. Cài đặt dependencies:
@@ -76,15 +80,6 @@ eas build -p android --profile preview
 4. Sau khi build xong, tải file APK về máy tính và chuyển vào điện thoại để cài đặt.
 
 > Lưu ý: trước khi cài đặt APK, bật quyền cài ứng dụng từ nguồn không xác định trên điện thoại Android.
-
-## Link tải app
-- Hiện tại repo chưa có APK sẵn để download trực tiếp.
-- down app tại đây: [https://drive.google.com/file/d/1gy4ximpxWic25-oxJW_R6FecbgMVbx6N/view?usp=drive_link](https://drive.google.com/file/d/1gy4ximpxWic25-oxJW_R6FecbgMVbx6N/view?usp=drive_link)
-- Nếu bạn đã build APK và muốn đặt vào repo, hãy thêm file vào thư mục `apk/` và cập nhật link ở đây.
-- Ví dụ (sau khi upload): `https://github.com/<username>/<repo>/raw/main/apk/vietrental-app.apk`
-
-## 🎬 Video Demo
-- video demo: [https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link](https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link)
 
 ## Tài khoản demo
 | Role | Email | Password |
