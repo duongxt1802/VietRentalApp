@@ -83,6 +83,9 @@ eas build -p android --profile preview
 - Nếu bạn đã build APK và muốn đặt vào repo, hãy thêm file vào thư mục `apk/` và cập nhật link ở đây.
 - Ví dụ (sau khi upload): `https://github.com/<username>/<repo>/raw/main/apk/vietrental-app.apk`
 
+## 🎬 Video Demo
+- video demo: [https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link](https://drive.google.com/file/d/1ypeh7xQfginMHuqKZGSWkaZylgqse-4c/view?usp=drive_link)
+
 ## Tài khoản demo
 | Role | Email | Password |
 |------|-------|----------|
@@ -200,6 +203,38 @@ Tìm kiếm hoạt động **client-side** bằng JavaScript filter:
 - Tìm theo tên, brand, loại xe, địa điểm
 - Kết hợp với filter loại xe (motorbike, car, van, electric, truck)
 - Sort theo giá, đánh giá
+
+## 🎯 Điểm Nổi Bật & Tính Năng Nâng Cao
+
+### 🔐 Bảo Mật & An Toàn
+- **Mã hóa XOR**: Bảo vệ dữ liệu nhạy cảm (token, user info)
+- **Auto-logout**: Tự động đăng xuất sau 7 ngày không hoạt động
+- **Secure Storage**: AsyncStorage với encryption cho thông tin quan trọng
+
+### 💾 Lưu Trữ & Quản Lý Dữ Liệu
+- **Persistent Storage**: AsyncStorage với expiry token management
+- **Auto-cleanup**: Tự động dọn dẹp dữ liệu hết hạn
+- **State Management**: Context API cho global state management
+
+### 🎨 Thiết Kế & UX
+- **Design System**: Theme thống nhất với COLORS, SIZES, SHADOWS
+- **Responsive UI**: Hoạt động mượt mà trên nhiều thiết bị
+- **Intuitive Navigation**: Bottom tabs + Stack navigation
+
+### 🔍 Tìm Kiếm & Lọc
+- **Smart Search**: Tìm kiếm theo tên xe, loại xe, địa điểm
+- **Advanced Filter**: Filter theo loại xe (ô tô, xe máy, xe tải, điện)
+- **Sort Options**: Sắp xếp theo giá, đánh giá, phổ biến
+
+### 💬 Tính Năng Nâng Cao
+- **Chat Mock**: Hỗ trợ real-time giữa Customer ↔ Admin
+- **Promo Codes**: Hệ thống mã khuyến mãi (SUMMER2025, NEWUSER10)
+- **Admin Dashboard**: Analytics với KPIs và charts
+
+### 📱 Cross-Platform
+- **iOS & Android**: Build sẵn với Expo
+- **APK Download**: [Link tải APK](https://drive.google.com/file/d/1gy4ximpxWic25-oxJW_R6FecbgMVbx6N/view?usp=drive_link)
+- **Expo Ready**: Chạy trên mọi thiết bị hỗ trợ Expo
 
 ---
 
