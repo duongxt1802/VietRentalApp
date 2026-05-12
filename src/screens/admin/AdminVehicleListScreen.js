@@ -26,7 +26,23 @@ export default function AdminVehicleListScreen({ navigation }) {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
+  const [addModalVisible, setAddModalVisible] = useState(false);
+
   const [editData, setEditData] = useState({
+    brand: '',
+    model: '',
+    type: '',
+    location: '',
+    description: '',
+    price: '',
+    seats: '',
+    year: '',
+    fuel: '',
+    transmission: '',
+    status: 'available',
+  });
+
+  const [newVehicleData, setNewVehicleData] = useState({
     brand: '',
     model: '',
     type: '',
@@ -131,26 +147,62 @@ export default function AdminVehicleListScreen({ navigation }) {
   };
 
   // ======================
-  // OPEN EDIT
+  // OPEN ADD MODAL
   // ======================
-  const handleEdit = (vehicle) => {
-    setSelectedVehicle(vehicle);
-
-    setEditData({
-      brand: vehicle.brand || '',
-      model: vehicle.model || '',
-      type: vehicle.type || '',
-      location: vehicle.location || '',
-      description: vehicle.description || '',
-      price: String(vehicle.price || ''),
-      seats: String(vehicle.specs?.seats || ''),
-      year: String(vehicle.specs?.year || ''),
-      fuel: vehicle.specs?.fuel || '',
-      transmission: vehicle.specs?.transmission || '',
-      status: vehicle.status || 'available',
+  const handleAdd = () => {
+    setNewVehicleData({
+      brand: '',
+      model: '',
+      type: '',
+      location: '',
+      description: '',
+      price: '',
+      seats: '',
+      year: '',
+      fuel: '',
+      transmission: '',
+      status: 'available',
     });
+    setAddModalVisible(true);
+  };
 
-    setEditModalVisible(true);
+  // ======================
+  // SAVE NEW VEHICLE
+  // ======================
+  const handleSaveNew = () => {
+    // Validation
+    if (!newVehicleData.brand || !newVehicleData.model || !newVehicleData.price) {
+      Alert.alert('Lỗi', 'Vui lòng điền đầy đủ thông tin cơ bản (Brand, Model, Price)');
+      return;
+    }
+
+    const newVehicle = {
+      id: Date.now(), // Simple ID generation
+      brand: newVehicleData.brand,
+      model: newVehicleData.model,
+      type: newVehicleData.type || 'car',
+      location: newVehicleData.location || 'TP.HCM',
+      description: newVehicleData.description || '',
+      price: Number(newVehicleData.price),
+      status: newVehicleData.status,
+      image: require('../../../assets/images/carnival.png'), // Default image
+      specs: {
+        seats: Number(newVehicleData.seats) || 4,
+        year: Number(newVehicleData.year) || new Date().getFullYear(),
+        fuel: newVehicleData.fuel || 'Xăng',
+        transmission: newVehicleData.transmission || 'Tự động',
+      },
+      rating: 4.5,
+      reviews: 0,
+    };
+
+    setVehicles((prev) => [...prev, newVehicle]);
+    setAddModalVisible(false);
+
+    Alert.alert(
+      'Thành công',
+      'Xe mới đã được thêm vào danh sách'
+    );
   };
 
   // ======================
@@ -261,7 +313,7 @@ export default function AdminVehicleListScreen({ navigation }) {
           Quản lý xe
         </Text>
 
-        <TouchableOpacity style={styles.addBtn}>
+        <TouchableOpacity style={styles.addBtn} onPress={handleAdd}>
           <Text style={styles.addText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -319,6 +371,116 @@ export default function AdminVehicleListScreen({ navigation }) {
           paddingBottom: 100,
         }}
       />
+
+      {/* ADD MODAL */}
+      <Modal
+        visible={addModalVisible}
+        animationType="slide"
+        transparent
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={styles.modalTitle}>
+                Thêm xe mới
+              </Text>
+
+              <Image
+                source={require('../../../assets/images/carnival.png')}
+                style={styles.editImage}
+                resizeMode="contain"
+              />
+
+              {[
+                ['brand', 'Brand *'],
+                ['model', 'Model *'],
+                ['type', 'Loại xe'],
+                ['location', 'Địa điểm'],
+                ['description', 'Mô tả'],
+                ['price', 'Giá thuê (VNĐ) *'],
+                ['seats', 'Số chỗ'],
+                ['year', 'Năm sản xuất'],
+                ['fuel', 'Nhiên liệu'],
+                ['transmission', 'Hộp số'],
+              ].map(([field, placeholder]) => (
+                <TextInput
+                  key={field}
+                  style={styles.input}
+                  placeholder={placeholder}
+                  value={newVehicleData[field]}
+                  keyboardType={
+                    ['price', 'seats', 'year'].includes(field)
+                      ? 'numeric'
+                      : 'default'
+                  }
+                  onChangeText={(text) =>
+                    setNewVehicleData({
+                      ...newVehicleData,
+                      [field]: text,
+                    })
+                  }
+                />
+              ))}
+
+              {/* STATUS ROW */}
+              <Text style={styles.sectionTitle}>
+                Trạng thái
+              </Text>
+
+              <View style={styles.statusRow}>
+                {[
+                  'available',
+                  'rented',
+                  'maintenance',
+                ].map((status) => (
+                  <TouchableOpacity
+                    key={status}
+                    style={[
+                      styles.statusOption,
+                      newVehicleData.status === status &&
+                        styles[getStatusStyle(status)],
+                    ]}
+                    onPress={() =>
+                      setNewVehicleData({
+                        ...newVehicleData,
+                        status,
+                      })
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.statusText,
+                        newVehicleData.status === status &&
+                          styles.activeStatusText,
+                      ]}
+                    >
+                      {statusLabel(status)}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              <TouchableOpacity
+                style={styles.saveBtn}
+                onPress={handleSaveNew}
+              >
+                <Text style={styles.saveText}>
+                  Thêm xe mới
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.cancelBtn}
+                onPress={() =>
+                  setAddModalVisible(false)
+                }
+              >
+                <Text>Hủy</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
 
       {/* EDIT MODAL */}
       <Modal
